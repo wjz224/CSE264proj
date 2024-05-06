@@ -1,0 +1,94 @@
+body {
+    margin: 0px;
+    font-family: arial;
+}
+main {
+    padding: 5px 20px;
+}
+
+header {
+    background-color: #294E80;
+    color: #fff;
+    padding: 5px 20px;
+}
+header h1 {
+    margin: 0px;
+}
+
+button {
+    background-color: #294E80;
+    color: #fff;
+    border: 1px solid #fff;
+    padding: 5px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #18a025;
+}
+
+#stats {
+    float:right;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}
+
+.board {
+    width: 600px;
+    border-top: 1px solid #666;
+    border-left: 1px solid #666;
+}
+.square {
+    float: left;
+    height: 40px;
+    width: 40px;
+    box-sizing: border-box;
+    border: solid #666;
+    border-width: 0px 1px 1px 0px;
+    margin: 0px;
+    padding:2px;
+}
+.letterholder {
+    float:left;
+    background-color:#F9F098;
+    background-color:#444;
+    padding:4px;
+    border:1px solid #000;
+}
+.tile {
+    float: left;
+    height: 30px;
+    width: 30px;
+    box-sizing: border-box;
+    background-color: #F9F098;
+    border: 1px solid #000;
+    margin: 2px;
+    text-align: center;
+    padding-top: 4px;
+    font-size: 16px;
+    font-family: sans-serif;
+    position: relative;
+}
+.tile[draggable='true'] {
+    cursor: pointer;
+}
+.tile:after {
+    position: absolute;
+    bottom: 0; right: 0;
+    font-size: 0.7em;
+}
+.tile[data-value='1']:after { content: '1'; }
+.tile[data-value='2']:after { content: '2'; }
+.tile[data-value='3']:after { content: '3'; }
+.tile[data-value='4']:after { content: '4'; }
+.tile[data-value='5']:after { content: '5'; }
+.tile[data-value='8']:after { content: '8'; }
+.tile[data-value='10']:after { content: '10'; }
+
+.letterblank {
+    font-style: italic;
+    color: #555555;
+}
