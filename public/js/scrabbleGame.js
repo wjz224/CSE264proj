@@ -54,7 +54,6 @@ class Game {
         content += `</div>`;
         content += this.board.html();
         content += this.players[this.playerTurn].displayLetters();
-        content += '<button id="play-word-button" onclick="window.scrabble.submitWord()">Play Word</button>';
         document.querySelector(this.gameElementSelector).innerHTML = content;
     }
     

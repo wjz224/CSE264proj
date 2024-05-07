@@ -2,6 +2,7 @@ body {
     margin: 0px;
     font-family: arial;
 }
+
 main {
     padding: 5px 20px;
 }
@@ -12,12 +13,12 @@ header {
     color: #fff;
     padding: 5px 20px;
 }
+
 header h1 {
     color: black;
     margin: 0px;
     font-size: 50px; 
 }
-
 
 button {
     background-color: #294E80;
@@ -31,17 +32,9 @@ button {
     right: 22%;
     transform: translateY(-50%);
 }
+
 button:hover {
     background-color: #18a025;
-}
-
-#stats {
-    float:right;
-}
-
-.error {
-    color: red;
-    font-weight: bold;
 }
 
 .board {
@@ -103,14 +96,17 @@ button:hover {
     font-family: sans-serif;
     position: relative;
 }
+
 .tile[draggable='true'] {
     cursor: pointer;
 }
+
 .tile:after {
     position: absolute;
     bottom: 0; right: 0;
     font-size: 0.7em;
 }
+
 .tile[data-value='1']:after { content: '1'; }
 .tile[data-value='2']:after { content: '2'; }
 .tile[data-value='3']:after { content: '3'; }
@@ -123,6 +119,7 @@ button:hover {
     font-style: italic;
     color: #555555;
 }
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -168,21 +165,6 @@ main {
     gap: 10px;
 }
 
-#stats-container {
-    position: absolute;
-    top: 300px; 
-    right: 265px; 
-}
-
-#stats-container {
-    position: absolute;
-    top: 300px; 
-    right: 265px; 
-    display: flex;
-    flex-direction: column; 
-}
-
-
 .stats-section {
     font-size: 20px;
     font-weight: bold;
@@ -196,15 +178,32 @@ main {
     background-color: rgba(255, 215, 0, 0.5); 
 }
 
-#remaining-letters, #player-score {
+#stats-container {
+    position: absolute;
+    top: 10%;
+    right: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 10%; /* Adjust the margin-top percentage to move it closer to the board */
+    margin-right: 19%;
+    height: 500px;
+}
+
+#remaining-letters, #player-score, #play-word-button {
     font-size: 24px;
     color: #E1B560;
     background-color: #2E332E; 
     padding: 8px 15px;
     border-radius: 20px; 
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    margin-bottom: 10px;
     text-align: center;
+    width: 200px;
+}
+#play-word-button {
+    margin-right: -15%; /* Remove bottom margin */
+    margin-top: -20%;
 }
 
 #player-score-value {
@@ -213,7 +212,6 @@ main {
 
 #remaining-letters span, #player-score span {
     color: #CCCCCC;
-
 }
 
 #stage-info {
@@ -271,7 +269,6 @@ main {
 #play-word-button:hover {
     background-color: #c2870b;
 }
-
 
 #messages{
     font-size: 30px;

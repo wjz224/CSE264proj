@@ -14,11 +14,11 @@
         <div id="game-container">
             <div id="game"></div>
         </div>
-        <div id="letters-container"></div>
-        <div id="button-container">
+        <div id="board-container">
             <div id="stats-container">
-                <div class="stats-section" id="remaining-letters">Letters Remaining: <span id="letters-remaining"></span></div>
-                <div class="stats-section" id="player-score">Your Score: <span id="player-score-value"></span></div>
+                <div id="remaining-letters">Letters Remaining: <span id="letters-remaining">0</span></div>
+                <div id="player-score">Your Score: <span id="player-score-value">0</span></div>
+                <button id="play-word-button" onclick="window.scrabble.submitWord()">Play Word</button>
             </div>
         </div>
         
