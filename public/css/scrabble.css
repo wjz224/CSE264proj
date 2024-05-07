@@ -48,8 +48,8 @@ button:hover {
     width: 600px;
     border-top: 1px solid #666;
     border-left: 1px solid #666;
-    background-color: #3B3B3B; /* Dark gray background for the board */
-    overflow: hidden; /* Ensure the board doesn't expand beyond its container */
+    background-color: #3B3B3B; 
+    overflow: hidden;
 }
 
 .square {
@@ -57,7 +57,7 @@ button:hover {
     height: 40px;
     width: 40px;
     box-sizing: border-box;
-    border: solid 1px #666; /* Dark border for the squares */
+    border: solid 1px #666; 
     margin: 0;
     padding: 0;
     position: relative;
@@ -66,12 +66,12 @@ button:hover {
 .letterholder {
     height: 100%;
     width: 100%;
-    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black overlay */
+    background-color: rgba(0, 0, 0, 0.3);
     padding: 4px;
     background-size: cover;
     background-repeat: no-repeat; 
     background-position: center; 
-    box-sizing: border-box; /* Include padding in width and height */
+    box-sizing: border-box; 
 }
 
 .letterholder {
@@ -85,8 +85,8 @@ button:hover {
     padding-left: 15px; 
     padding-right: 15px;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
+    justify-content: center; 
+    align-items: center; 
 }
 
 .tile {
@@ -139,7 +139,7 @@ header {
     color: #fff;
     padding: 30px 20px;
     text-align: center;
-    background-size: 20%; /* Adjusted background-size */
+    background-size: 20%; 
     background-repeat: no-repeat;
     background-position: center; 
 }
@@ -170,24 +170,56 @@ main {
 
 #stats-container {
     position: absolute;
-    top: 300px; /* Adjust as needed */
-    right: 265px; /* Adjust as needed */
+    top: 300px; 
+    right: 265px; 
+}
+
+#stats-container {
+    position: absolute;
+    top: 300px; 
+    right: 265px; 
+    display: flex;
+    flex-direction: column; 
+}
+
+
+.stats-section {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    margin-bottom: 20px;
+    text-align: center;
+    width: 180px;
+    background-color: rgba(255, 215, 0, 0.5); 
 }
 
 #remaining-letters, #player-score {
-    font-size: 18px;
-    font-weight: bold;
-    color: black; /* Adjust color as needed */
-    margin-bottom: 10px; /* Add some space between the two items */
+    font-size: 24px;
+    color: #E1B560;
+    background-color: #2E332E; 
+    padding: 8px 15px;
+    border-radius: 20px; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+    text-align: center;
 }
+
+#player-score-value {
+    margin-left: 10px;
+}
+
 #remaining-letters span, #player-score span {
-    color: red;
+    color: #CCCCCC;
+
 }
-/* Style for stage, turns left, and points required */
+
 #stage-info {
     margin-bottom: 20px;
     padding: 20px;
-    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    background-color: rgba(0, 0, 0, 0.6); 
     border-radius: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
     display: flex;
@@ -199,13 +231,11 @@ main {
     margin-bottom: 15px;
     font-size: 20px;
     font-weight: bold;
-    color: #E1B560; /* Rich gold color for text */
+    color: #E1B560; 
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 }
 
 #stage, #turns-left, #points-required {
-    padding: 10px 20px;
-    border-radius: 20px;
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
@@ -214,16 +244,35 @@ main {
 }
 
 #stage {
-    background-color: #2E332E; /* Dark greenish-brown color for stage */
-    color: #E1B560; /* Rich gold color for text */
+    color: #E1B560; 
 }
 
 #turns-left {
-    background-color: #2E332E; /* Deep blue color for turns left */
-    color: #E1B560; /* Rich gold color for text */
+    color: #E1B560; 
 }
 
 #points-required {
-    background-color: #2E332E; /* Dark brownish color for points required */
-    color: #E1B560; /* Rich gold color for text */
+    color: #E1B560; 
+}
+
+#play-word-button {
+    background-color: #da9b0a;
+    color: #fff;
+    border: none;
+    padding: 15px 40px; 
+    border-radius: 8px; 
+    cursor: pointer; 
+    font-size: 18px; 
+    font-weight: bold; 
+    text-transform: uppercase; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+}
+
+#play-word-button:hover {
+    background-color: #c2870b;
+}
+
+
+#messages{
+    font-size: 30px;
 }

@@ -49,12 +49,12 @@ class Game {
         content += this.displayGameStatus();
         content += `<div id="stage-info">`;
         content += `<div>Stage: <span id="stage">${this.stage}</span></div>`;
-        content += `<div>Points to pass this stage: <span id="points-required">${this.stagePoints[this.stage - 1]}</span></div>`;
-        content += `<div>Turns Left: <span id="turns-left">${this.turnsPerStage[this.stage - 1] - this.currentTurn}</span></div>`; // Display turns left
+        content += `<div>Points required to pass this stage: <span id="points-required">${this.stagePoints[this.stage - 1]}</span></div>`;
+        content += `<div>Turns left in this stage: <span id="turns-left">${this.turnsPerStage[this.stage - 1] - this.currentTurn}</span></div>`; // Display turns left
         content += `</div>`;
         content += this.board.html();
         content += this.players[this.playerTurn].displayLetters();
-        content += '<button onclick="window.scrabble.submitWord()">Play Word</button>';
+        content += '<button id="play-word-button" onclick="window.scrabble.submitWord()">Play Word</button>';
         document.querySelector(this.gameElementSelector).innerHTML = content;
     }
     
@@ -98,13 +98,13 @@ class Game {
         }
         // Check various conditions for valid word submission
         if (!placedLetter) {
-            document.getElementById('messages').innerHTML = '<span class="error">You need to place a letter</span>';
+            document.getElementById('messages').innerHTML = '<span class="error">Invalid. You need to place a letter</span>';
             return false;
         } else if (words == null || words.length == 0) {
-            document.getElementById('messages').innerHTML = '<span class="error">Invalid Word Submission- Please correct and try again</span>';
+            document.getElementById('messages').innerHTML = '<span class="error">Invalid Word Submission</span>';
             return false;
         } else if ((!this.areWordsAdjacent(allPreviousWords, words)) && (words.length != 0) && startGame != 0) {
-            document.getElementById('messages').innerHTML = '<span class="error">Words must be connected to the previous turn\'s tiles</span>';
+            document.getElementById('messages').innerHTML = '<span class="error">Words must be connected</span>';
             return false;
         }else if (startGame == 0) {
             startGame += 1;
