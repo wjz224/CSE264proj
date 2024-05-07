@@ -11,3 +11,9 @@ Instructions to run game:
 
 3. Go to the local host:
 `http://localhost:3000/`
+
+
+Members:
+Wilson Zheng (wjz224)
+Ryan Zheng (ryz224)
+Andy Shen (shs322)
