@@ -15,14 +15,17 @@ var allPreviousWords = [];
 var wasInvalid = false;
 var previousInvalidSet = [];
 var placedLetter = false;
-
 // Game Class
 class Game {
     constructor(elementselector) {
         this.numberOfPlayers = 2;
-        this.skipValidation = false; // good for testing...
+        this.skipValidation = false; // testing
         this.players = [];
         this.gameElementSelector = elementselector;
+        this.stage = 1; // Initialize the stage
+        this.stagePoints = [100, 150, 300, 400, 500]; // Point thresholds for each stage
+        this.turnsPerStage = [1, 10, 10, 10, 10]; // Number of turns allowed per stage
+        this.currentTurn = 0; // Current turn count
         window.scrabble = this; // Expose the instance for debugging
     }
 
@@ -41,15 +44,19 @@ class Game {
         this.setupPlayers();
     }
 
-    // Draw the game interface including the board, player's letters, and game status
     draw() {
         let content = "";
         content += this.displayGameStatus();
+        content += `<div>Stage: ${this.stage}</div>`;
+        content += `<div>Points to pass this stage: ${this.stagePoints[this.stage - 1]}</div>`;
+        content += `<div>Turns Left: ${this.turnsPerStage[this.stage - 1] - this.currentTurn}</div>`; // Display turns left
         content += this.board.html();
         content += this.players[this.playerTurn].displayLetters();
         content += '<button onclick="window.scrabble.submitWord()">Play Word</button>';
         document.querySelector(this.gameElementSelector).innerHTML = content;
     }
+    
+
 
     // Display the number of remaining letters and player's score
     displayGameStatus() {
@@ -77,10 +84,9 @@ class Game {
         const player = this.getCurrentPlayer();
         const words = this.findPlayedWords();
 
+        
         // Check various conditions for valid word submission
-        if (startGame == 0) {
-            startGame += 1;
-        } else if (!placedLetter) {
+        if (!placedLetter) {
             document.getElementById('messages').innerHTML = '<span class="error">You need to place a letter</span>';
             return false;
         } else if (words == null || words.length == 0) {
@@ -89,8 +95,16 @@ class Game {
         } else if ((!this.areWordsAdjacent(allPreviousWords, words)) && (words.length != 0)) {
             document.getElementById('messages').innerHTML = '<span class="error">Words must be connected to the previous turn\'s tiles</span>';
             return false;
+        }else if (startGame == 0) {
+            startGame += 1;
+            this.currentTurn++;
+        } else{
+            this.currentTurn++;
         }
-
+        
+    
+        console.log("CurrentTurn:", this.currentTurn)
+        console.log("Stage turns", this.turnsPerStage[this.stage-1]);
         // Add played words to the list of all previous words
         allPreviousWords = allPreviousWords.concat(words);
 
@@ -108,13 +122,45 @@ class Game {
                 player.removeTile(t);
                 tempLetter.status = 3;
                 this.playedLetters.push(tempLetter);
-                if (this.letterBag.length > 0)
+                if (this.letterBag.length > 0) {
                     player.giveTile(this.letterBag.shift());
+                }
             }
         }
-        
+
+        // Check if the player has reached the required points for the current stage
+        if (player.score >= this.stagePoints[this.stage - 1]) {
+            // Move to the next stage if the player has reached the threshold
+            this.stage++;
+            // reset the number of turns to 0 when moving on to next stage
+            this.currentTurn = 0;
+            // Check if the player has completed all stages
+            if (this.stage > 5) {
+                this.endGame(true); // Player wins
+                return;
+            }
+            // Display stage information
+            this.draw();
+            document.getElementById('messages').innerHTML = `<span>You've reached Stage ${this.stage}. You need to score ${this.stagePoints[this.stage - 1]} points to pass this stage.</span>`;
+        } else if(this.currentTurn >= this.turnsPerStage[this.stage - 1]){
+            // End the game if the player fails to reach the required points for the current stage
+            this.endGame(false); // Player loses
+        }
+
         // Redraw the game interface
         this.draw();
+    }
+    // Function to end the game
+    endGame(playerWins) {
+        if (playerWins) {
+            // Player wins
+            alert("Congratulations! You've reached the final stage and won the game!");
+        } else {
+            // Player loses
+            alert("Game Over! You failed to reach the required points by stage " + this.currentStage + ".");
+        }
+        // Reset the page after the player clicks OK
+        window.location.reload();
     }
 
     // Check if two sets of words are adjacent (checking to see if new word is adjacent/connected with any word from the old set)

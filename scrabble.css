@@ -63,7 +63,7 @@ button:hover {
     float: left;
     background-color: #da9b0a;
     padding: 4px;
-    background-image: url('images/scroll.jpg');
+    background-image: url('images/scroll-new.jpg');
     background-size: cover;
     background-repeat: no-repeat; 
     background-position: center; 
@@ -160,8 +160,9 @@ main {
     font-size: 18px;
     font-weight: bold;
     color: Black;
+    margin-top: -150vh; /* Adjust as needed */
 }
 
 #remaining-letters span, #player-score span {
-    color: yellow;
+    color: red;
 }
