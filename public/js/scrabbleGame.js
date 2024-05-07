@@ -23,8 +23,8 @@ class Game {
         this.players = [];
         this.gameElementSelector = elementselector;
         this.stage = 1; // Initialize the stage
-        this.stagePoints = [3, 6, 8, 9, 10]; // Point thresholds for each stage
-        this.turnsPerStage = [1, 2, 3, 4, 7]; // Number of turns allowed per stage
+        this.stagePoints = [3, 10, 20, 35, 50]; // Point thresholds for each stage
+        this.turnsPerStage = [1, 2, 3, 3, 5]; // Number of turns allowed per stage
         this.currentTurn = 0; // Current turn count
         window.scrabble = this; // Expose the instance for debugging
     }
