@@ -28,7 +28,7 @@ button {
     cursor: pointer;
     position: absolute;
     top: 50%;
-    right: 25%;
+    right: 22%;
     transform: translateY(-50%);
 }
 button:hover {
@@ -152,7 +152,7 @@ main {
 #stats-container {
     position: absolute;
     top: 300px; /* Adjust as needed */
-    right: 365px; /* Adjust as needed */
+    right: 265px; /* Adjust as needed */
 }
 
 #remaining-letters, #player-score {
