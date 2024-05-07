@@ -1,31 +1,35 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Scrambled Scrolls</title>
     <meta charset="UTF-8">
-    <link type="text/css" href="scrabble.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scrambled Scrolls</title>
+    <link rel="stylesheet" href="scrabble.css">
 </head>
 <body>
-
-    
     <header>
         <h1>Scrambled Scrolls</h1>
     </header>
     <main>
-        <script src="game.js"></script>
-        <script src="board.js"></script>
-        <script src="lettertile.js"></script>
-        <script src="player.js"></script>
-        
-        <div id="game"></div>
+        <div id="game-container">
+            <div id="game"></div>
+        </div>
+        <div id="letters-container"></div>
+        <div id="stats-container">
+            <div id="remaining-letters">Letters Remaining: <span id="letters-remaining"></span></div>
+            <div id="player-score">Your Score: <span id="player-score-value"></span></div>
+        </div>
+        <script src="scrabbleBoard.js"></script>
+        <script src="tileClass.js"></script>
+        <script src="playerClass.js"></script>
+        <script src="scrabbleGame.js"></script>
         <script>
-        // Create a Game instance
-        var game = new Game('#game');
-        
-        // Start
-        game.setup();
+            // Create a Game instance
+            var game = new Game('#game');
+            
+            // Start
+            game.setup();
         </script>
     </main>
-        
 </body>
 </html>

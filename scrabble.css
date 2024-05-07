@@ -8,20 +8,28 @@ main {
 
 header {
     background-color: #294E80;
+    font-family: Brush Script MT, Brush Script Std, cursive;
     color: #fff;
     padding: 5px 20px;
 }
 header h1 {
+    color: black;
     margin: 0px;
+    font-size: 50px; 
 }
+
 
 button {
     background-color: #294E80;
     color: #fff;
-    border: 1px solid #fff;
-    padding: 5px 20px;
+    border: none; 
+    padding: 10px 30px;
     border-radius: 4px;
     cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 25%;
+    transform: translateY(-50%);
 }
 button:hover {
     background-color: #18a025;
@@ -52,11 +60,15 @@ button:hover {
     padding:2px;
 }
 .letterholder {
-    float:left;
-    background-color:#F9F098;
-    background-color:#444;
-    padding:4px;
-    border:1px solid #000;
+    float: left;
+    background-color: #da9b0a;
+    padding: 4px;
+    background-image: url('images/scroll.jpg');
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center; 
+    padding-left: 15px; 
+    padding-right: 15px; 
 }
 .tile {
     float: left;
@@ -91,4 +103,65 @@ button:hover {
 .letterblank {
     font-style: italic;
     color: #555555;
+}
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('images/ancient-temple4.png'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-position: center;
+}
+
+header {
+    background-image: url('images/header-scroll.png');
+    background-color: transparent; 
+    color: #fff;
+    padding: 30px 20px;
+    text-align: center;
+    background-size: 20%; /* Adjusted background-size */
+    background-repeat: no-repeat;
+    background-position: center; 
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+#game-container {
+    margin-bottom: 20px;
+}
+
+#button-container {
+    display: flex;
+    justify-content: flex-end; 
+    width: 100%; 
+}
+
+#letters-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+#stats-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center; 
+    width: 100%;
+}
+
+#remaining-letters, #player-score {
+    font-size: 18px;
+    font-weight: bold;
+    color: Black;
+}
+
+#remaining-letters span, #player-score span {
+    color: yellow;
 }
