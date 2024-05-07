@@ -168,7 +168,7 @@ class Game {
             alert("Congratulations! You've reached the final stage and won the game!");
         } else {
             // Player loses
-            alert("Game Over! You failed to reach the required points by stage " + this.tage + ".");
+            alert("Game Over! You failed to reach the required points by stage " + this.stage + ".");
         }
         // Reset the page after the player clicks OK
         window.location.reload();
