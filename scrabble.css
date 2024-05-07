@@ -150,19 +150,17 @@ main {
 }
 
 #stats-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center; 
-    width: 100%;
+    position: absolute;
+    top: 300px; /* Adjust as needed */
+    right: 365px; /* Adjust as needed */
 }
 
 #remaining-letters, #player-score {
     font-size: 18px;
     font-weight: bold;
-    color: Black;
-    margin-top: -150vh; /* Adjust as needed */
+    color: black; /* Adjust color as needed */
+    margin-bottom: 10px; /* Add some space between the two items */
 }
-
 #remaining-letters span, #player-score span {
     color: red;
 }

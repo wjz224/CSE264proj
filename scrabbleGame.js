@@ -23,8 +23,8 @@ class Game {
         this.players = [];
         this.gameElementSelector = elementselector;
         this.stage = 1; // Initialize the stage
-        this.stagePoints = [100, 150, 300, 400, 500]; // Point thresholds for each stage
-        this.turnsPerStage = [1, 10, 10, 10, 10]; // Number of turns allowed per stage
+        this.stagePoints = [3, 7, 20, 40, 70]; // Point thresholds for each stage
+        this.turnsPerStage = [1, 2, 3, 4, 7]; // Number of turns allowed per stage
         this.currentTurn = 0; // Current turn count
         window.scrabble = this; // Expose the instance for debugging
     }
@@ -45,7 +45,7 @@ class Game {
     }
 
     draw() {
-        let content = "";
+        var content = "";
         content += this.displayGameStatus();
         content += `<div>Stage: ${this.stage}</div>`;
         content += `<div>Points to pass this stage: ${this.stagePoints[this.stage - 1]}</div>`;
@@ -67,7 +67,7 @@ class Game {
         }
 
         // Display player's score
-        for (let p = 0; p < this.players.length; p++) {
+        for (var p = 0; p < this.players.length; p++) {
             const playerScoreElement = document.getElementById('player-score-value');
             if (playerScoreElement) {
                 playerScoreElement.textContent = this.players[p].score;
@@ -75,7 +75,7 @@ class Game {
         }
 
         // Display error messages
-        let content = '<div id="messages"></div>';
+        var content = '<div id="messages"></div>';
         return content;
     }
 
@@ -84,7 +84,12 @@ class Game {
         const player = this.getCurrentPlayer();
         const words = this.findPlayedWords();
 
-        
+        // Check if any of the words are invalid
+        const invalidWord = words.find(word => word.score === 0);
+        if (invalidWord) {
+            document.getElementById('messages').innerHTML = '<span class="error">Invalid Word Submission- Please correct and try again</span>';
+            return false;
+        }
         // Check various conditions for valid word submission
         if (!placedLetter) {
             document.getElementById('messages').innerHTML = '<span class="error">You need to place a letter</span>';
@@ -92,7 +97,7 @@ class Game {
         } else if (words == null || words.length == 0) {
             document.getElementById('messages').innerHTML = '<span class="error">Invalid Word Submission- Please correct and try again</span>';
             return false;
-        } else if ((!this.areWordsAdjacent(allPreviousWords, words)) && (words.length != 0)) {
+        } else if ((!this.areWordsAdjacent(allPreviousWords, words)) && (words.length != 0) && startGame != 0) {
             document.getElementById('messages').innerHTML = '<span class="error">Words must be connected to the previous turn\'s tiles</span>';
             return false;
         }else if (startGame == 0) {
@@ -109,13 +114,13 @@ class Game {
         allPreviousWords = allPreviousWords.concat(words);
 
         // Calculate scores and update player's score
-        for (let w = 0; w < words.length; w++) {
+        for (var w = 0; w < words.length; w++) {
             player.score += words[w].score;
         }
 
         // Remove tiles from the player's rack
-        let tempLetter;
-        let t = player.letters.length - 1;
+        var tempLetter;
+        var t = player.letters.length - 1;
         for (; t >= 0; t--) {
             tempLetter = player.letters[t];
             if (tempLetter.status == 2) {
@@ -171,14 +176,14 @@ class Game {
         }
 
         // Iterate through each word in both sets and check adjacency
-        for (let i = 0; i < set1.length; i++) {
-            for (let j = 0; j < set2.length; j++) {
-                let set1word = set1[i].word;
-                let set2word = set2[j].word;
-                for (let k = 0; k < set2word.length; k++) {
-                    let square2 = set2word[k].square;
-                    for (let m = 0; m < set1word.length; m++) {
-                        let square1 = set1word[m].square;
+        for (var i = 0; i < set1.length; i++) {
+            for (var j = 0; j < set2.length; j++) {
+                var set1word = set1[i].word;
+                var set2word = set2[j].word;
+                for (var k = 0; k < set2word.length; k++) {
+                    var square2 = set2word[k].square;
+                    for (var m = 0; m < set1word.length; m++) {
+                        var square1 = set1word[m].square;
                         if (areAdjacent(square1, square2)) {
                             return true;
                         }
@@ -202,13 +207,13 @@ class Game {
         }
 
         // Initialize variables
-        let at;
-        let dir = "";
-        let score = 0;
-        let skipEnd = false;
-        let tempLetter;
-        let currentword = [];
-        let allwords = [];
+        var at;
+        var dir = "";
+        var score = 0;
+        var skipEnd = false;
+        var tempLetter;
+        var currentword = [];
+        var allwords = [];
 
         // Iterate through each placed letter
         for (var ol = 0; ol < orderedLetters.length; ol++) {
@@ -221,16 +226,16 @@ class Game {
                 if (orderedLetters.length === 1) {
                     // Treat it as both the start and end of the word in both directions
                     // Horizontal word
-                    let horizontalWord = this.findHorizontalWord(orderedLetters[0]);
+                    var horizontalWord = this.findHorizontalWord(orderedLetters[0]);
                     if (horizontalWord.length > 1) {
-                        let horizontalScore = this.getWordScore(horizontalWord);
+                        var horizontalScore = this.getWordScore(horizontalWord);
                         allwords.push({ word: horizontalWord, score: horizontalScore });
                     }
 
                     // Vertical word
-                    let verticalWord = this.findVerticalWord(orderedLetters[0]);
+                    var verticalWord = this.findVerticalWord(orderedLetters[0]);
                     if (verticalWord.length > 1) {
-                        let verticalScore = this.getWordScore(verticalWord);
+                        var verticalScore = this.getWordScore(verticalWord);
                         allwords.push({ word: verticalWord, score: verticalScore });
                     }
                 } else {
@@ -345,6 +350,7 @@ class Game {
                 return null;
             }
         }
+      
         return allwords;
     }
 
@@ -369,9 +375,9 @@ class Game {
     getAllLettersInWord(playerLetters, direction) {
         // Initialize variables
         const word = [];
-        let start = 0;
-        let end = 0;
-        let diff = 0;
+        var start = 0;
+        var end = 0;
+        var diff = 0;
 
         // Determine start and end points based on direction
         if (direction === 'across') {
@@ -390,10 +396,10 @@ class Game {
         if (diff === playerLetters.length) return playerLetters.slice();
 
         // Iterate through the row or column to find missing letters
-        let lt;
-        let nt;
-        let l = start;
-        let i = 0;
+        var lt;
+        var nt;
+        var l = start;
+        var i = 0;
 
         for (; l <= end; l++) {
             lt = playerLetters[i];
@@ -428,14 +434,14 @@ class Game {
         const currentWord = [tempLetter];
         
         // Check above the current tile
-        let aboveTile = this.findPlayedTile(tempLetter.square.row - 1, tempLetter.square.column);
+        var aboveTile = this.findPlayedTile(tempLetter.square.row - 1, tempLetter.square.column);
         while (aboveTile !== null) {
             currentWord.unshift(aboveTile); // Add the above tile to the beginning of the word
             aboveTile = this.findPlayedTile(aboveTile.square.row - 1, aboveTile.square.column); // Move to the tile above
         }
         
         // Check below the current tile
-        let belowTile = this.findPlayedTile(tempLetter.square.row + 1, tempLetter.square.column);
+        var belowTile = this.findPlayedTile(tempLetter.square.row + 1, tempLetter.square.column);
         while (belowTile !== null) {
             currentWord.push(belowTile); // Add the below tile to the end of the word
             belowTile = this.findPlayedTile(belowTile.square.row + 1, belowTile.square.column); // Move to the tile below
@@ -448,7 +454,7 @@ class Game {
     findHorizontalWord(tempLetter) {
         // Initialize an array to store the horizontal word
         const currentWord = [tempLetter];
-        let at;
+        var at;
         
         // Check left of the current tile
         if (tempLetter.square.column > 0) {
@@ -476,14 +482,15 @@ class Game {
     
     // Get the score of the word
     getWordScore(word) {
-        let s = 0; // Total score
-        let ts = 0; // Temporary score
-        let wmp = 1; // Word multiplier
-        let log = ""; // Log string
-        let wordstring = ""; // String representation of the word
+        var s = 0; // Total score
+        var ts = 0; // Temporary score
+        var wmp = 1; // Word multiplier
+        var log = ""; // Log string
+        var wordstring = ""; // String representation of the word
         var dictionary = ""; // Word dictionary
-        let invalid = false; // Flag for invalid word
+        var invalid = false; // Flag for invalid word
         
+        console.log(word)
         // Convert the array of letters to a string
         word.forEach(letter => {
             // Check for blank letters
@@ -491,8 +498,8 @@ class Game {
                 invalid = true;
             } else if (letter.index == Letter.BLANK && letter.letter == '') {
                 // Prompt user for the letter assigned to blank tiles
-                let blankletter = '';
-                let lettervalid = false;
+                var blankletter = '';
+                var lettervalid = false;
                 while (!lettervalid) {
                     blankletter = prompt('What letter should be assigned to blank tile?');
                     blankletter = blankletter.toUpperCase();
@@ -515,7 +522,7 @@ class Game {
 
         // Load dictionary file
         function loadWords() {
-            let request = new XMLHttpRequest();
+            var request = new XMLHttpRequest();
             request.open("GET", "words/words.txt", false);
             request.onreadystatechange = function () {
                 if (request.readyState === 4) {
@@ -527,13 +534,14 @@ class Game {
         
         // Validate word against dictionary
         if (!this.skipValidation) {
-            let validword = false;
+            var validword = false;
             loadWords();
             if (dictionary.includes(wordstring.toUpperCase())) {
                 console.log('Word found');
                 validword = true;
             } else {
                 console.log('Word not found - ' + wordstring);
+                validword = false;
             }
         
             if (!validword) {
@@ -557,7 +565,7 @@ class Game {
     
     // Find a played tile (letter) at the specified row and column coordinates
     findPlayedTile(row, column) {
-        for (let tempLetter of this.playedLetters) {
+        for (var tempLetter of this.playedLetters) {
             if (tempLetter.square.row == row && tempLetter.square.column == column) {
                 return tempLetter;
             }
@@ -576,18 +584,18 @@ class Game {
         this.playedLetters = [];
         this.numberOfPlayers = 1;
     
-        let avialableLetters = [];
+        var avialableLetters = [];
         // Generate list of available letters based on letter counts
-        for (let l = 0; l < Game.letterCounts.length; l++) {
-            for (let c = 0; c < Game.letterCounts[l]; c++) {
+        for (var l = 0; l < Game.letterCounts.length; l++) {
+            for (var c = 0; c < Game.letterCounts[l]; c++) {
                 avialableLetters.push(l);
             }
         }
     
-        let letterIndex;
-        let newTile;
+        var letterIndex;
+        var newTile;
         // Randomly assign letters to the letter bag
-        for (let t = avialableLetters.length; t > 0; t--) {
+        for (var t = avialableLetters.length; t > 0; t--) {
             letterIndex = Math.floor(t * Math.random());
             newTile = new Tile(avialableLetters.splice(letterIndex, 1)[0]);
             newTile.id = t;
@@ -597,9 +605,9 @@ class Game {
     
     // Set up players for the game
     setupPlayers() {
-        let player = new Player();
+        var player = new Player();
         // Give each player 7 random letters from the letter bag
-        for (let tilecount = 0; tilecount < 7; tilecount++) {
+        for (var tilecount = 0; tilecount < 7; tilecount++) {
             player.giveTile(this.letterBag.shift());
         }
         this.players.push(player);
