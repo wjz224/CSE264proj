@@ -13,7 +13,7 @@ Instructions to run game:
 `http://localhost:3000/`
 
 
-Members:
+Authors:
 Wilson Zheng (wjz224)
 Ryan Zheng (ryz224)
 Andy Shen (shs322)

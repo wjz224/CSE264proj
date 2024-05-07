@@ -172,7 +172,7 @@ class Game {
         }
         // Reset the page after the player clicks OK
         window.location.reload();
-    }
+    }   
 
     // Check if two sets of words are adjacent (checking to see if new word is adjacent/connected with any word from the old set)
     areWordsAdjacent(set1, set2) {
