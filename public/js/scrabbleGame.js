@@ -23,7 +23,7 @@ class Game {
         this.players = [];
         this.gameElementSelector = elementselector;
         this.stage = 1; // Initialize the stage
-        this.stagePoints = [3, 7, 20, 40, 70]; // Point thresholds for each stage
+        this.stagePoints = [3, 6, 8, 9, 10]; // Point thresholds for each stage
         this.turnsPerStage = [1, 2, 3, 4, 7]; // Number of turns allowed per stage
         this.currentTurn = 0; // Current turn count
         window.scrabble = this; // Expose the instance for debugging
@@ -84,8 +84,12 @@ class Game {
         const player = this.getCurrentPlayer();
         const words = this.findPlayedWords();
 
+        var invalidWord = false;
         // Check if any of the words are invalid
-        const invalidWord = words.find(word => word.score === 0);
+        if(words){
+            invalidWord = words.find(word => word.score === 0);
+        }
+     
         if (invalidWord) {
             document.getElementById('messages').innerHTML = '<span class="error">Invalid Word Submission- Please correct and try again</span>';
             return false;
@@ -162,7 +166,7 @@ class Game {
             alert("Congratulations! You've reached the final stage and won the game!");
         } else {
             // Player loses
-            alert("Game Over! You failed to reach the required points by stage " + this.currentStage + ".");
+            alert("Game Over! You failed to reach the required points by stage " + this.tage + ".");
         }
         // Reset the page after the player clicks OK
         window.location.reload();
@@ -536,7 +540,10 @@ class Game {
         if (!this.skipValidation) {
             var validword = false;
             loadWords();
-            if (dictionary.includes(wordstring.toUpperCase())) {
+            if(!wordstring){
+                validword = false;
+            }
+            else if (dictionary.includes(wordstring.toUpperCase())) {
                 console.log('Word found');
                 validword = true;
             } else {
