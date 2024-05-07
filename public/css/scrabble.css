@@ -48,17 +48,32 @@ button:hover {
     width: 600px;
     border-top: 1px solid #666;
     border-left: 1px solid #666;
+    background-color: #3B3B3B; /* Dark gray background for the board */
+    overflow: hidden; /* Ensure the board doesn't expand beyond its container */
 }
+
 .square {
     float: left;
     height: 40px;
     width: 40px;
     box-sizing: border-box;
-    border: solid #666;
-    border-width: 0px 1px 1px 0px;
-    margin: 0px;
-    padding:2px;
+    border: solid 1px #666; /* Dark border for the squares */
+    margin: 0;
+    padding: 0;
+    position: relative;
 }
+
+.letterholder {
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.3); /* Semi-transparent black overlay */
+    padding: 4px;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-position: center; 
+    box-sizing: border-box; /* Include padding in width and height */
+}
+
 .letterholder {
     float: left;
     background-color: #da9b0a;
@@ -68,8 +83,12 @@ button:hover {
     background-repeat: no-repeat; 
     background-position: center; 
     padding-left: 15px; 
-    padding-right: 15px; 
+    padding-right: 15px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
 }
+
 .tile {
     float: left;
     height: 30px;
@@ -163,4 +182,48 @@ main {
 }
 #remaining-letters span, #player-score span {
     color: red;
+}
+/* Style for stage, turns left, and points required */
+#stage-info {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+#stage-info > div {
+    margin-bottom: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #E1B560; /* Rich gold color for text */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+#stage, #turns-left, #points-required {
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+#stage {
+    background-color: #2E332E; /* Dark greenish-brown color for stage */
+    color: #E1B560; /* Rich gold color for text */
+}
+
+#turns-left {
+    background-color: #2E332E; /* Deep blue color for turns left */
+    color: #E1B560; /* Rich gold color for text */
+}
+
+#points-required {
+    background-color: #2E332E; /* Dark brownish color for points required */
+    color: #E1B560; /* Rich gold color for text */
 }

@@ -47,9 +47,11 @@ class Game {
     draw() {
         var content = "";
         content += this.displayGameStatus();
-        content += `<div>Stage: ${this.stage}</div>`;
-        content += `<div>Points to pass this stage: ${this.stagePoints[this.stage - 1]}</div>`;
-        content += `<div>Turns Left: ${this.turnsPerStage[this.stage - 1] - this.currentTurn}</div>`; // Display turns left
+        content += `<div id="stage-info">`;
+        content += `<div>Stage: <span id="stage">${this.stage}</span></div>`;
+        content += `<div>Points to pass this stage: <span id="points-required">${this.stagePoints[this.stage - 1]}</span></div>`;
+        content += `<div>Turns Left: <span id="turns-left">${this.turnsPerStage[this.stage - 1] - this.currentTurn}</span></div>`; // Display turns left
+        content += `</div>`;
         content += this.board.html();
         content += this.players[this.playerTurn].displayLetters();
         content += '<button onclick="window.scrabble.submitWord()">Play Word</button>';
